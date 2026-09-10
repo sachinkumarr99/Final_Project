@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8"/>
+
+```
+<style>
+
+    @page {
+        size: A4;
+        margin: 20px;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Georgia, serif;
+        background: #ffffff;
+        color: #222222;
+    }
+
+    .certificate {
+        min-height: 1050px;
+        border: 8px double #14532d;
+        padding: 35px;
+        box-sizing: border-box;
+    }
+
+    /* ================= HEADER ================= */
+
+    .header {
+        text-align: center;
+    }
+
+    .govt {
+        font-size: 14px;
+        margin-bottom: 5px;
+        letter-spacing: 1px;
+    }
+
+    .department {
+        font-size: 27px;
+        font-weight: bold;
+        color: #14532d;
+    }
+
+    .subtitle {
+        margin-top: 8px;
+        font-size: 13px;
+        color: #555555;
+    }
+
+    /* ================= TITLE ================= */
+
+    .title {
+        margin-top: 40px;
+        text-align: center;
+        font-size: 30px;
+        font-weight: bold;
+        color: #14532d;
+    }
+
+    /* ================= STATUS ================= */
+
+    .status {
+        text-align: center;
+        margin: 20px 0;
+        font-size: 26px;
+        font-weight: bold;
+    }
+
+    .verified {
+        color: #15803d;
+    }
+
+    .unverified {
+        color: #b91c1c;
+    }
+
+    /* ================= DESCRIPTION ================= */
+
+    .description {
+        font-size: 15px;
+        line-height: 1.6;
+        text-align: center;
+        margin: 30px 20px;
+    }
+
+    /* ================= DETAILS ================= */
+
+    .details {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 25px;
+    }
+
+    .details td {
+        padding: 9px;
+        border-bottom: 1px solid #dddddd;
+        font-size: 15px;
+    }
+
+    .label {
+        width: 230px;
+        font-weight: bold;
+    }
+
+    /* ================= BOTTOM ================= */
+
+    .bottom {
+        width: 100%;
+        margin-top: 45px;
+        border-collapse: collapse;
+    }
+
+    .bottom td {
+        vertical-align: top;
+    }
+
+    .date-section {
+        width: 35%;
+        font-size: 14px;
+        line-height: 1.8;
+    }
+
+    /* ================= QR ================= */
+
+    .qr-section {
+        width: 30%;
+        text-align: center;
+    }
+
+    .qr {
+        width: 110px;
+        height: 110px;
+    }
+
+    .qr-text {
+        font-size: 11px;
+        margin-top: 5px;
+    }
+
+    /* ================= SIGNATURE ================= */
+
+    .signature-section {
+        width: 35%;
+        text-align: center;
+    }
+
+    .signature-img {
+        width: 180px;
+        height: auto;
+        display: block;
+        margin: 0 auto 5px auto;
+    }
+
+    .signature-line {
+        border-top: 2px solid #000000;
+        padding-top: 5px;
+        font-weight: bold;
+        font-size: 13px;
+    }
+
+    .signature-small {
+        display: block;
+        margin-top: 5px;
+        font-size: 11px;
+    }
+
+    /* ================= FOOTER ================= */
+
+    .footer {
+        margin-top: 30px;
+        text-align: center;
+        font-size: 10px;
+        color: #777777;
+    }
+
+</style>
+```
+
+</head>
+
+<body>
+
+<div class="certificate">
+
+```
+<!-- ================= HEADER ================= -->
+
+<div class="header">
+
+    <div class="govt">
+        GOVERNMENT OF INDIA
+    </div>
+
+    <div class="department">
+        LEGAL METROLOGY DEPARTMENT
+    </div>
+
+    <div class="subtitle">
+        Ensuring Accuracy, Protecting Trust
+    </div>
+
+</div>
+
+
+<!-- ================= TITLE ================= -->
+
+<div class="title">
+    VERIFICATION CERTIFICATE
+</div>
+
+
+<!-- ================= STATUS ================= -->
+
+<div
+    class="status"
+    th:classappend="${verified} ? ' verified' : ' unverified'"
+    th:text="${verified} ? '✓ VERIFIED' : '⚠ UNVERIFIED'">
+    VERIFIED
+</div>
+
+
+<!-- ================= DESCRIPTION ================= -->
+
+<div
+    class="description"
+    th:if="${verified}">
+
+    This is to certify that the
+    <span th:text="${instrumentType}">Instrument</span>
+    instrument has been verified in accordance with the applicable
+    provisions and is fit for use.
+
+</div>
+
+
+<div
+    class="description"
+    th:unless="${verified}">
+
+    This instrument has been registered, but its verification
+    is currently pending. This document does not confirm
+    successful verification.
+
+</div>
+
+
+<!-- ================= DETAILS ================= -->
+
+<table class="details">
+
+    <tr>
+        <td class="label">Certificate Number</td>
+        <td th:text="${certificateNumber}">
+            CERT-2026-000000001
+        </td>
+    </tr>
+
+    <tr>
+        <td class="label">Instrument Number</td>
+        <td th:text="${instrumentNumber}">
+            LM-2026-000000001
+        </td>
+    </tr>
+
+    <tr>
+        <td class="label">Instrument Type</td>
+        <td th:text="${instrumentType}">
+            Weighing Machine
+        </td>
+    </tr>
+
+    <tr>
+        <td class="label">Manufacturer</td>
+        <td th:text="${manufacturer}">
+            Manufacturer
+        </td>
+    </tr>
+
+    <tr>
+        <td class="label">Model</td>
+        <td th:text="${model}">
+            Model
+        </td>
+    </tr>
+
+    <tr>
+        <td class="label">Capacity</td>
+        <td th:text="${capacity}">
+            100
+        </td>
+    </tr>
+
+    <tr>
+        <td class="label">Accuracy Class</td>
+        <td th:text="${accuracyClass}">
+            CLASS_III
+        </td>
+    </tr>
+
+    <tr>
+        <td class="label">Owner</td>
+        <td th:text="${owner}">
+            Owner Name
+        </td>
+    </tr>
+
+    <tr>
+        <td class="label">Installation Location</td>
+        <td th:text="${installationLocation}">
+            Location
+        </td>
+    </tr>
+
+</table>
+
+
+<!-- ================= BOTTOM SECTION ================= -->
+
+<table class="bottom">
+
+    <tr>
+
+        <!-- DATE -->
+
+        <td class="date-section">
+
+            <b>Verification Date</b>
+
+            <br/>
+
+            <span th:text="${verificationDate}">
+                
+            </span>
+
+            <br/>
+
+            <b>Valid Upto</b>
+
+            <br/>
+
+            <span th:text="${validUpto}">
+                
+            </span>
+
+        </td>
+
+
+        <!-- QR -->
+
+        <td class="qr-section">
+
+            <img
+                class="qr"
+                th:src="'data:image/png;base64,' + ${qrCode}"
+                alt="Certificate Verification QR Code"
+            />
+
+            <br/>
+
+            <span class="qr-text">
+                Scan to verify certificate
+            </span>
+
+        </td>
+
+
+        <!-- SIGNATURE -->
+
+        <td class="signature-section">
+
+            <img
+                th:src="'data:image/png;base64,' + ${signature}"
+                alt="Seal and Signature"
+                class="signature-img"
+            />
+
+            <div class="signature-line">
+                Legal Metrology Officer
+            </div>
+
+            <span class="signature-small">
+                Seal &amp; Signature
+            </span>
+
+        </td>
+
+    </tr>
+
+</table>
+
+
+<!-- ================= FOOTER ================= -->
+
+<div class="footer">
+    This certificate is digitally generated and can be verified using the QR code.
+</div>
+```
+
+</div>
+
+</body>
+
+</html>

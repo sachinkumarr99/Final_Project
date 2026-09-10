@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: Online_Verification
+  mongodb:
+    uri: mongodb://localhost:27017/legal_metrology
+  servlet:
+    multipart:
+      max-file-size: 25MB
+      max-request-size: 25MB
+
+  profiles:
+    active: dev

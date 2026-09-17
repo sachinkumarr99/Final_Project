@@ -265,8 +265,9 @@ private <T> List<DocumentUploadResponse<T>> uploadCategorizedDocuments(
         Assignment assignmentDetails= assignmentRepo.findByApplicationNumber(applicationNumber).orElseThrow(()->new UsernameNotFoundException("Not Assigned"));
 
        boolean isAdmin = securityUtils.getCurrentUserRole().contains(Role.ADMIN.name());
-        if (!assignmentDetails.getAssignedById().equals(currentUserId) && !isAdmin) {
-                throw new AccessDeniedException("Only the officer or admin who assigned this task can get documents");
+       // change
+        if (!assignmentDetails.getAssignedToId().equals(currentUserId) && !isAdmin) {
+                throw new AccessDeniedException("Only the officer or admin  can get documents");
         }
      return verificationEvidenceRepo.findAllByApplicationNumber(applicationNumber);
     }

@@ -276,9 +276,10 @@ String format = formatObject != null
         : "pdf";
 
 String secureUrl = secureUrlObject.toString();
+String actualPublicId=publicIdObject.toString();
 
 data.setFormatType(format);
-data.setPublicId(publicId);
+data.setPublicId(actualPublicId);
 data.setCertificateUrl(secureUrl);
 data.setResourceType("raw");
 
